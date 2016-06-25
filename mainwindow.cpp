@@ -7,7 +7,10 @@
 #include "listaClase.h"
 #include "listalaboratorio.h"
 #include <QMessageBox>
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+using namespace  std;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -57,14 +60,12 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_BtnAgregar_clicked()
 {
- /*   int codigo=ui->TxtCodigo->text();
-    char nombre[30];
-    strcpy(nombre,ui->TxtNombre->text();
-    int matriculados=ui->TxtMatriculados->text();
-    char hora[10];
-    strcpy(hora,ui->TxtHora->text());
-    int aula=ui->TxtAula->text();
-    char catedratico[30];
-    strcpy(catedratico,ui->TxtCatedratico->text());
-    int dias=ui->TxtDias->text();*/
+    int codigo=ui->TxtCodigo->text().toInt();
+    QString snombre=ui->TxtNombre->text();
+    char * nombre=new char[strlen(snombre.toStdString().c_str())+1];
+    strcpy(nombre,snombre.toStdString().c_str());
+
+    cout<<nombre<<endl;
+    //delete nombre;
+
 }
