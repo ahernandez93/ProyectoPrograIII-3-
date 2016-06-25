@@ -5,6 +5,7 @@
 #include <iostream>
 #include "laboratorio.h"
 #include "listaClase.h"
+#include "listalaboratorio.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -12,34 +13,48 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    lista1 = new listaClase();
+    lista2= new ListaLaboratorio;
+    lista1->leerArchivoAleatorio();
+    lista2->leerArchivoAleatorio();
+    lista1->guardarArchivoAleatorio();
+    lista2->leerArchivoAleatorio();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete lista1;
+    delete lista2;
+
+
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    Curso * curso1 = new Clase(1,"Programacion III",15,"1pm",501,"Amed Castro",12345);
+   // Curso * curso1 = new Clase(1,"Programacion III",15,"1pm",501,"Amed Castro",12345);
 
-    Curso * curso2 = new Clase(2,"Programacion IV",13,"2pm",50,"Allan Villatoro",1234);
+   // Curso * curso2 = new Clase(2,"Programacion IV",13,"2pm",50,"Allan Villatoro",1234);
 
-    Curso * curso3 = new Clase(3,"Programacion V",10,"2pm",10,"Allan Hernandez",6);
+   // Curso * curso3 = new Clase(3,"Programacion V",10,"2pm",10,"Allan Hernandez",6);
 
-        listaClase * lista = new listaClase();
+//        listaClase * lista = new listaClase();
         //lista->insertarAlFinal(curso1);
         //lista->insertarAlFinal(curso2);
         //lista->insertarAlFinal(curso3);
 
-        lista->leerArchivoAleatorio();
-        lista->mostrarLista();
+   //     lista->leerArchivoAleatorio();
+     //   lista->mostrarLista();
 
-        lista->guardarArchivoAleatorio();
+       // lista->guardarArchivoAleatorio();
 
-        delete curso1;
-        delete curso2;
-        delete curso3;
-        delete lista;
+        //delete curso1;
+        //delete curso2;
+        //delete curso3;
+
+}
+
+void MainWindow::on_BtnAgregar_clicked()
+{
 
 }

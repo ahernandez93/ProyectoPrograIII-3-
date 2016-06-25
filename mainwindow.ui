@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -247,7 +247,7 @@
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>50</y>
+        <y>0</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -260,7 +260,7 @@
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>100</y>
+        <y>50</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -298,7 +298,7 @@
      <widget class="QLabel" name="label_15">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>90</x>
         <y>20</y>
         <width>37</width>
         <height>16</height>
@@ -311,11 +311,24 @@
      <widget class="QComboBox" name="CboCodigo">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>130</x>
         <y>20</y>
         <width>91</width>
         <height>22</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="BtnAgregar">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>100</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Agregar</string>
       </property>
      </widget>
     </widget>
