@@ -33,6 +33,20 @@ private slots:
 
     void on_BtnGuardar_clicked();
 
+    void on_CboCodigo_2_activated(int index);
+
+    void on_BtnNuevo_2_clicked();
+
+    void on_BtnAgregar_2_clicked();
+
+    void on_BtnModificar_2_clicked();
+
+    void on_BtnEliminar_2_clicked();
+
+    void on_BtnMatricular_2_clicked();
+
+    void on_BtnGuardar_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     listaClase * lista1;

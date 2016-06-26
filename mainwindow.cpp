@@ -13,9 +13,7 @@
 #include <string.h>
 
 using namespace  std;
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->pushButton->setVisible(false);
@@ -25,7 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     lista1 = new listaClase();
     lista2= new ListaLaboratorio;
+
     lista1->leerArchivoAleatorio();
+
     Curso * temp=lista1->getInicio();
     while(temp!=0){
         QString s=QString::number(temp->getCodigo());
@@ -63,6 +63,41 @@ MainWindow::~MainWindow()
 
     delete lista1;
     delete lista2;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
+/*****************************CLASES*************************************/
+
+void MainWindow::on_CboCodigo_activated(int index)
+{
+    int codigo = ui->CboCodigo->currentText().toInt();
+    Curso * encontrado = lista1->buscarCurso2(codigo);
+
+    ui->TxtCodigo->setText(QString::number(encontrado->getCodigo()));
+    ui->TxtNombre->setText(QString(encontrado->getNombre()));
+    ui->TxtMatriculados->setText(QString::number(encontrado->getMatriculados()));
+    ui->TxtHora->setText(QString(encontrado->getHora()));
+    ui->TxtAula->setText(QString::number(((Clase *)encontrado)->getAula()));
+    ui->TxtCatedratico->setText(QString(((Clase *)encontrado)->getCatedratico()));
+    ui->TxtDias->setText(QString::number(((Clase *)encontrado)->getDias()));
+    ui->TxtCupo->setText(QString::number(encontrado->getCupo() - encontrado->getMatriculados()));
+}
+
+void MainWindow::on_BtnNuevo_clicked()
+{
+    ui->TxtCodigo->setText("");
+    ui->TxtNombre->setText("");
+    ui->TxtMatriculados->setText("");
+    ui->TxtHora->setText("");
+    ui->TxtAula->setText("");
+    ui->TxtCatedratico->setText("");
+    ui->TxtDias->setText("");
+    ui->TxtCupo->setText("");
+    ui->CboCodigo->setCurrentIndex(-1);
 }
 
 void MainWindow::on_BtnAgregar_clicked()
@@ -114,39 +149,6 @@ void MainWindow::on_BtnAgregar_clicked()
     lista1->insertar(codigo,nombre,matriculados,hora,aula,catedratico,dias);
 
     delete nuevo;
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-
-}
-
-void MainWindow::on_CboCodigo_activated(int index)
-{
-    int codigo = ui->CboCodigo->currentText().toInt();
-    Curso * encontrado = lista1->buscarCurso2(codigo);
-
-    ui->TxtCodigo->setText(QString::number(encontrado->getCodigo()));
-    ui->TxtNombre->setText(QString(encontrado->getNombre()));
-    ui->TxtMatriculados->setText(QString::number(encontrado->getMatriculados()));
-    ui->TxtHora->setText(QString(encontrado->getHora()));
-    ui->TxtAula->setText(QString::number(((Clase *)encontrado)->getAula()));
-    ui->TxtCatedratico->setText(QString(((Clase *)encontrado)->getCatedratico()));
-    ui->TxtDias->setText(QString::number(((Clase *)encontrado)->getDias()));
-    ui->TxtCupo->setText(QString::number(encontrado->getCupo() - encontrado->getMatriculados()));
-}
-
-void MainWindow::on_BtnNuevo_clicked()
-{
-    ui->TxtCodigo->setText("");
-    ui->TxtNombre->setText("");
-    ui->TxtMatriculados->setText("");
-    ui->TxtHora->setText("");
-    ui->TxtAula->setText("");
-    ui->TxtCatedratico->setText("");
-    ui->TxtDias->setText("");
-    ui->TxtCupo->setText("");
-    ui->CboCodigo->setCurrentIndex(-1);
 }
 
 void MainWindow::on_BtnModificar_clicked()
@@ -213,4 +215,150 @@ void MainWindow::on_BtnMatricular_clicked()
 void MainWindow::on_BtnGuardar_clicked()
 {
     lista1->guardarArchivoAleatorio();
+}
+
+/*****************************LABORATORIOS*************************************/
+
+void MainWindow::on_CboCodigo_2_activated(int index)
+{
+    int codigo = ui->CboCodigo_2->currentText().toInt();
+    Curso * encontrado = lista2->buscarCurso2(codigo);
+
+    ui->TxtCodigo_2->setText(QString::number(encontrado->getCodigo()));
+    ui->TxtNombre_2->setText(QString(encontrado->getNombre()));
+    ui->TxtMatriculados_2->setText(QString::number(encontrado->getMatriculados()));
+    ui->TxtHora_2->setText(QString(encontrado->getHora()));
+    ui->TxtAula_2->setText(QString::number(((Clase *)encontrado)->getAula()));
+    ui->TxtCatedratico_2->setText(QString(((Clase *)encontrado)->getCatedratico()));
+    ui->TxtDias_2->setText(QString::number(((Clase *)encontrado)->getDias()));
+    ui->TxtCupo_2->setText(QString::number(encontrado->getCupo() - encontrado->getMatriculados()));
+}
+
+void MainWindow::on_BtnNuevo_2_clicked()
+{
+    ui->TxtCodigo_2->setText("");
+    ui->TxtNombre_2->setText("");
+    ui->TxtMatriculados_2->setText("");
+    ui->TxtHora_2->setText("");
+    ui->TxtAula_2->setText("");
+    ui->TxtCatedratico_2->setText("");
+    ui->TxtDias_2->setText("");
+    ui->TxtCupo_2->setText("");
+    ui->CboCodigo_2->setCurrentIndex(-1);
+}
+
+void MainWindow::on_BtnAgregar_2_clicked()
+{
+    int codigo=ui->TxtCodigo_2->text().toInt();
+    if(lista2->buscarCurso(codigo)){
+       QMessageBox msgbox;
+       msgbox.setText("Laboratorio ya existe");
+       msgbox.exec();
+       return;
+    }
+
+    QString Qnombre=ui->TxtNombre_2->text();
+    char * nombre=new char[strlen(Qnombre.toStdString().c_str())+1];
+    strcpy(nombre,Qnombre.toStdString().c_str());
+
+    int matriculados=ui->TxtMatriculados_2->text().toInt();
+
+    QString Qhora=ui->TxtHora_2->text();
+    char * hora= new char[strlen(Qnombre.toStdString().c_str())+1];
+    strcpy(hora,Qhora.toStdString().c_str());
+
+    int aula=ui->TxtAula_2->text().toInt();
+
+    if((aula >= 1) &&  (aula <= 50))
+    {
+
+    }
+    else
+    {
+        QMessageBox msgbox;
+        msgbox.setText("Aula no valida, ingrese un valor entre 1 y 50");
+        msgbox.exec();
+        ui->TxtAula_2->setFocus();
+        return;
+    }
+
+    QString Qcatedratico=ui->TxtCatedratico_2->text();
+    char * catedratico= new char[strlen(Qcatedratico.toStdString().c_str())+1];
+    strcpy(catedratico,Qcatedratico.toStdString().c_str());
+
+    int dias=ui->TxtDias_2->text().toInt();
+
+    Curso * nuevo= new Clase(codigo,nombre,matriculados,hora,aula,catedratico,dias);
+    nuevo->imprimir();
+    cout<<endl;
+    ui->CboCodigo_2->addItem(ui->TxtCodigo_2->text());
+    lista2->insertar(codigo,nombre,matriculados,hora,aula,catedratico,dias);
+
+    delete nuevo;
+}
+
+void MainWindow::on_BtnModificar_2_clicked()
+{
+    int codigo=ui->TxtCodigo_2->text().toInt();
+
+    QString Qnombre=ui->TxtNombre_2->text();
+    char * nombre=new char[strlen(Qnombre.toStdString().c_str())+1];
+    strcpy(nombre,Qnombre.toStdString().c_str());
+
+    int matriculados=ui->TxtMatriculados_2->text().toInt();
+
+    QString Qhora=ui->TxtHora_2->text();
+    char * hora= new char[strlen(Qnombre.toStdString().c_str())+1];
+    strcpy(hora,Qhora.toStdString().c_str());
+
+    int aula=ui->TxtAula_2->text().toInt();
+
+    QString Qcatedratico=ui->TxtCatedratico_2->text();
+    char * catedratico= new char[strlen(Qcatedratico.toStdString().c_str())+1];
+    strcpy(catedratico,Qcatedratico.toStdString().c_str());
+
+    int dias=ui->TxtDias_2->text().toInt();
+
+    lista2->ModificarCurso(codigo, nombre, matriculados, hora, aula, catedratico, dias);
+
+    QMessageBox msgBox;
+    msgBox.setText("Laboratorio modificado con exito");
+    msgBox.exec();
+
+    ui->CboCodigo_2->activated(ui->CboCodigo_2->currentIndex());
+}
+
+void MainWindow::on_BtnEliminar_2_clicked()
+{
+    if(ui->TxtCodigo_2->text().isEmpty())
+    {
+       QMessageBox msgbox;
+       msgbox.setText("Codigo esta en blanco");
+       msgbox.exec();
+    }
+    else
+    {
+        lista2->EliminarCurso(ui->TxtCodigo_2->text().toInt());
+        QMessageBox msgBox;
+        msgBox.setText("Laboratorio eliminado con exito");
+        msgBox.exec();
+
+        ui->CboCodigo_2->removeItem(ui->CboCodigo_2->currentIndex());
+
+        if(lista2->getInicio() == 0)
+            ui->BtnNuevo_2->click();
+        else
+            ui->CboCodigo_2->activated(ui->CboCodigo_2->currentIndex());
+    }
+}
+
+void MainWindow::on_BtnMatricular_2_clicked()
+{
+    lista2->Matricular(ui->TxtCodigo_2->text().toInt());
+    ui->CboCodigo_2->activated(ui->CboCodigo_2->currentIndex());
+}
+
+void MainWindow::on_BtnGuardar_2_clicked()
+{
+    lista2->guardarArchivoAleatorio();
 }

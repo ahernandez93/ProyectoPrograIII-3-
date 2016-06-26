@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>410</width>
+    <width>408</width>
     <height>430</height>
    </rect>
   </property>
@@ -33,7 +33,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -382,6 +382,9 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="TxtDias_2">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>100</x>
@@ -499,7 +502,7 @@
      <widget class="QPushButton" name="BtnGuardar_2">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>120</x>
         <y>300</y>
         <width>131</width>
         <height>41</height>
@@ -513,7 +516,7 @@
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>100</y>
+        <y>40</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -522,37 +525,11 @@
        <string>Nuevo</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="BtnBuscar_2">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>50</y>
-        <width>91</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Buscar</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="BtnAbrir_2">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>300</y>
-        <width>121</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Abrir archivo</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="BtnModificar_2">
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>150</y>
+        <y>140</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -565,7 +542,7 @@
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>200</y>
+        <y>190</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -578,7 +555,7 @@
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>250</y>
+        <y>240</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -610,6 +587,45 @@
        <string>Buscar:</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="BtnAgregar_2">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>90</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Agregar</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>270</y>
+        <width>43</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cupo:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="TxtCupo_2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>270</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QPushButton" name="pushButton">
@@ -631,7 +647,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>410</width>
+     <width>408</width>
      <height>21</height>
     </rect>
    </property>
@@ -672,8 +688,6 @@
   <tabstop>TxtHora_2</tabstop>
   <tabstop>BtnGuardar_2</tabstop>
   <tabstop>BtnNuevo_2</tabstop>
-  <tabstop>BtnBuscar_2</tabstop>
-  <tabstop>BtnAbrir_2</tabstop>
   <tabstop>BtnModificar_2</tabstop>
   <tabstop>BtnEliminar_2</tabstop>
   <tabstop>BtnMatricular_2</tabstop>
