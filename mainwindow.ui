@@ -6,12 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>411</width>
-    <height>487</height>
+    <width>410</width>
+    <height>430</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>410</width>
+    <height>430</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Control Academico</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTabWidget" name="tabWidget">
@@ -198,7 +207,7 @@
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>200</y>
+        <y>180</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -211,7 +220,7 @@
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>150</y>
+        <y>130</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -224,7 +233,7 @@
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>250</y>
+        <y>230</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -233,24 +242,11 @@
        <string>Matricular</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="BtnBuscar">
-      <property name="geometry">
-       <rect>
-        <x>280</x>
-        <y>0</y>
-        <width>91</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Buscar</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="BtnNuevo">
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>50</y>
+        <y>30</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -262,7 +258,7 @@
      <widget class="QPushButton" name="BtnGuardar">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>120</x>
         <y>300</y>
         <width>131</width>
         <height>41</height>
@@ -270,19 +266,6 @@
       </property>
       <property name="text">
        <string>Guardar archivo</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="BtnAbrir">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>300</y>
-        <width>121</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Abrir archivo</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_15">
@@ -312,7 +295,7 @@
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>100</y>
+        <y>80</y>
         <width>91</width>
         <height>41</height>
        </rect>
@@ -322,6 +305,9 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="TxtCupo">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>80</x>
@@ -645,7 +631,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>411</width>
+     <width>410</width>
      <height>21</height>
     </rect>
    </property>
@@ -669,13 +655,11 @@
   <tabstop>TxtAula</tabstop>
   <tabstop>TxtCatedratico</tabstop>
   <tabstop>TxtDias</tabstop>
-  <tabstop>BtnBuscar</tabstop>
   <tabstop>BtnNuevo</tabstop>
   <tabstop>BtnAgregar</tabstop>
   <tabstop>BtnModificar</tabstop>
   <tabstop>BtnEliminar</tabstop>
   <tabstop>BtnMatricular</tabstop>
-  <tabstop>BtnAbrir</tabstop>
   <tabstop>BtnGuardar</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>CboCodigo</tabstop>

@@ -5,6 +5,8 @@
 #include "clase.h"
 #include "laboratorio.h"
 #include "curso.h"
+#include <QMessageBox>
+
 using namespace std;
 listaClase::listaClase()
 {
@@ -122,6 +124,45 @@ void listaClase::EliminarCurso(int codigo)
     }
 
 
+}
+
+void listaClase::ModificarCurso(int codigo, char * nombre, int matriculados, char * hora, int aula, char * catedratico, int dias)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo())
+        {
+            temp->setNombre(nombre);
+            temp->setMatriculados(matriculados);
+            temp->setHora(hora);
+            ((Clase *)temp)->setAula(aula);
+            ((Clase *)temp)->setCatedratico(catedratico);
+            ((Clase *)temp)->setDias(dias);
+        }
+
+        temp = temp->getSiguiente();
+    }
+
+}
+
+void listaClase::Matricular(int codigo)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo())
+        {
+            if(temp->getMatriculados()<30)
+                temp->setMatriculados(temp->getMatriculados() + 1);
+            else
+            {
+                QMessageBox msgbox;
+                msgbox.setText("Clase llena");
+                msgbox.exec();
+
+            }
+        }
+        temp = temp->getSiguiente();
+    }
 }
 
 void listaClase::mostrarLista()

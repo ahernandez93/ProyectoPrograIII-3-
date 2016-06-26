@@ -29,6 +29,10 @@ private slots:
 
     void on_BtnEliminar_clicked();
 
+    void on_BtnMatricular_clicked();
+
+    void on_BtnGuardar_clicked();
+
 private:
     Ui::MainWindow *ui;
     listaClase * lista1;
