@@ -1,20 +1,26 @@
-#ifndef ListaLaboratorio_H
-#define ListaLaboratorio_H
+#ifndef listaLaboratorio_H
+#define listaLaboratorio_H
 #include "Curso.h"
 
-class ListaLaboratorio
+class listaLaboratorio
 {
     public:
-        ListaLaboratorio();
-        virtual ~ListaLaboratorio();
+        listaLaboratorio();
+        virtual ~listaLaboratorio();
         void insertarAlInicio(Curso *);
         void insertar(int, const char *, int, const char*, int, const char *);
         void insertarAlFinal(Curso *);
+        void EliminarCurso(int);
+        void ModificarCurso(int, char *, int, char *, int, char *);
+        void Matricular(int);
+
         void mostrarLista();
-        Curso * buscarCurso(int);
+        bool buscarCurso(int);
         void guardarArchivoAleatorio();
         void leerArchivoAleatorio();
+        Curso * getInicio();
         void agregar(Curso *);
+        Curso * buscarCurso2(int);
 
     protected:
 
@@ -22,6 +28,7 @@ class ListaLaboratorio
         Curso * inicio;
         Curso * fin;
         char nombreArchivo[30];
+
 };
 
-#endif // ListaLaboratorio_H
+#endif // listaLaboratorio_H
