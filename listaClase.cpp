@@ -5,6 +5,8 @@
 #include "clase.h"
 #include "laboratorio.h"
 #include "curso.h"
+#include <QMessageBox>
+
 using namespace std;
 listaClase::listaClase()
 {
@@ -86,6 +88,83 @@ void listaClase::agregar(Curso* nuevo)
    }
 }
 
+void listaClase::EliminarCurso(int codigo)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo()){
+
+            if (temp->getSiguiente() != 0 && temp->getAnterior() !=0)
+            {
+                temp->getAnterior()->setSiguiente(temp->getSiguiente());
+                temp->getSiguiente()->setAnterior(temp->getAnterior());
+                delete temp;
+
+            }
+            else if(temp->getAnterior() == 0 && temp->getSiguiente() != 0)
+            {
+                temp->getSiguiente()->setAnterior(0);
+                inicio = temp->getSiguiente();
+                delete temp;
+            }
+            else if(temp->getAnterior() != 0 && temp->getSiguiente() == 0)
+            {
+                temp->getAnterior()->setSiguiente(0);
+                fin = temp->getAnterior();
+                delete temp;
+            }
+            else
+            {
+                delete temp;
+                inicio = NULL;
+                fin = NULL;
+            }
+        }
+        temp = temp->getSiguiente();
+    }
+
+
+}
+
+void listaClase::ModificarCurso(int codigo, char * nombre, int matriculados, char * hora, int aula, char * catedratico, int dias)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo())
+        {
+            temp->setNombre(nombre);
+            temp->setMatriculados(matriculados);
+            temp->setHora(hora);
+            ((Clase *)temp)->setAula(aula);
+            ((Clase *)temp)->setCatedratico(catedratico);
+            ((Clase *)temp)->setDias(dias);
+        }
+
+        temp = temp->getSiguiente();
+    }
+
+}
+
+void listaClase::Matricular(int codigo)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo())
+        {
+            if(temp->getMatriculados()<30)
+                temp->setMatriculados(temp->getMatriculados() + 1);
+            else
+            {
+                QMessageBox msgbox;
+                msgbox.setText("Clase llena");
+                msgbox.exec();
+
+            }
+        }
+        temp = temp->getSiguiente();
+    }
+}
+
 void listaClase::mostrarLista()
 {
     Curso * temp = inicio;
@@ -105,6 +184,18 @@ bool listaClase::buscarCurso(int codigo)
         temp = temp->getSiguiente();
     }
     return false;
+}
+
+Curso * listaClase::buscarCurso2(int codigo)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo())
+            return temp;
+
+        temp = temp->getSiguiente();
+    }
+    return 0;
 }
 
 void listaClase::guardarArchivoAleatorio()
