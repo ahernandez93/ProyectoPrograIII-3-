@@ -1,12 +1,14 @@
-#include "ListaLaboratorio.h"
+#include "listaLaboratorio.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include "Laboratorio.h"
+#include "clase.h"
 #include "laboratorio.h"
 #include "curso.h"
+#include <QMessageBox>
+
 using namespace std;
-ListaLaboratorio::ListaLaboratorio()
+listaLaboratorio::listaLaboratorio()
 {
     //ctor
     inicio=0;
@@ -14,7 +16,7 @@ ListaLaboratorio::ListaLaboratorio()
 
 }
 
-ListaLaboratorio::~ListaLaboratorio()
+listaLaboratorio::~listaLaboratorio()
 {
     //dtor
     cout<<"Detructor de lista de laboratorio"<<endl;
@@ -28,7 +30,7 @@ ListaLaboratorio::~ListaLaboratorio()
 
 }
 
-void ListaLaboratorio::insertarAlInicio(Curso * nuevo)
+void listaLaboratorio::insertarAlInicio(Curso * nuevo)
 {
     if(inicio == 0){
         inicio = nuevo;
@@ -41,9 +43,9 @@ void ListaLaboratorio::insertarAlInicio(Curso * nuevo)
    }
 }
 
-void ListaLaboratorio::insertar(int codigo, const char * nombre, int matriculados, const char* hora, int numLaboratorio, const char * instructor)
+void listaLaboratorio::insertar(int codigo, const char * nombre, int matriculados, const char* hora, int NumLaboratorio, const char * Instructor)
 {
-    Curso * nuevo= new Laboratorio(codigo,nombre,matriculados,hora,numLaboratorio,instructor);
+    Curso * nuevo= new Laboratorio(codigo,nombre,matriculados,hora,NumLaboratorio,Instructor);
     if(inicio == 0){
         inicio = nuevo;
         fin = nuevo;
@@ -55,7 +57,11 @@ void ListaLaboratorio::insertar(int codigo, const char * nombre, int matriculado
    }
 }
 
-void ListaLaboratorio::insertarAlFinal(Curso * nuevo)
+Curso * listaLaboratorio::getInicio(){
+    return inicio;
+}
+
+void listaLaboratorio::insertarAlFinal(Curso * nuevo)
 {
     if(inicio == 0){
         inicio = nuevo;
@@ -69,7 +75,7 @@ void ListaLaboratorio::insertarAlFinal(Curso * nuevo)
    }
 }
 
-void ListaLaboratorio::agregar(Curso* nuevo)
+void listaLaboratorio::agregar(Curso* nuevo)
 {
     if(inicio == 0){
         inicio = nuevo;
@@ -82,7 +88,83 @@ void ListaLaboratorio::agregar(Curso* nuevo)
    }
 }
 
-void ListaLaboratorio::mostrarLista()
+void listaLaboratorio::EliminarCurso(int codigo)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo()){
+
+            if (temp->getSiguiente() != 0 && temp->getAnterior() !=0)
+            {
+                temp->getAnterior()->setSiguiente(temp->getSiguiente());
+                temp->getSiguiente()->setAnterior(temp->getAnterior());
+                delete temp;
+
+            }
+            else if(temp->getAnterior() == 0 && temp->getSiguiente() != 0)
+            {
+                temp->getSiguiente()->setAnterior(0);
+                inicio = temp->getSiguiente();
+                delete temp;
+            }
+            else if(temp->getAnterior() != 0 && temp->getSiguiente() == 0)
+            {
+                temp->getAnterior()->setSiguiente(0);
+                fin = temp->getAnterior();
+                delete temp;
+            }
+            else
+            {
+                delete temp;
+                inicio = NULL;
+                fin = NULL;
+            }
+        }
+        temp = temp->getSiguiente();
+    }
+
+
+}
+
+void listaLaboratorio::ModificarCurso(int codigo, char * nombre, int matriculados, char * hora, int NumLaboratorio, char * Instructor)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo())
+        {
+            temp->setNombre(nombre);
+            temp->setMatriculados(matriculados);
+            temp->setHora(hora);
+            ((Laboratorio *)temp)->setNumLaboratorio(NumLaboratorio);
+            ((Laboratorio *)temp)->setInstructor(Instructor);
+        }
+
+        temp = temp->getSiguiente();
+    }
+
+}
+
+void listaLaboratorio::Matricular(int codigo)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo())
+        {
+            if(temp->getMatriculados()<30)
+                temp->setMatriculados(temp->getMatriculados() + 1);
+            else
+            {
+                QMessageBox msgbox;
+                msgbox.setText("Laboratorio llena");
+                msgbox.exec();
+
+            }
+        }
+        temp = temp->getSiguiente();
+    }
+}
+
+void listaLaboratorio::mostrarLista()
 {
     Curso * temp = inicio;
     while(temp !=0){
@@ -91,7 +173,19 @@ void ListaLaboratorio::mostrarLista()
     }
 }
 
-Curso* ListaLaboratorio::buscarCurso(int codigo)
+bool listaLaboratorio::buscarCurso(int codigo)
+{
+    Curso * temp = inicio;
+    while(temp !=0){
+        if(codigo == temp->getCodigo())
+            return true;
+
+        temp = temp->getSiguiente();
+    }
+    return false;
+}
+
+Curso * listaLaboratorio::buscarCurso2(int codigo)
 {
     Curso * temp = inicio;
     while(temp !=0){
@@ -103,7 +197,7 @@ Curso* ListaLaboratorio::buscarCurso(int codigo)
     return 0;
 }
 
-void ListaLaboratorio::guardarArchivoAleatorio()
+void listaLaboratorio::guardarArchivoAleatorio()
 {
     ofstream archivoSalida ("archivo.laboratorio",ios::out|ios::binary);
     Curso *temp1=inicio;
@@ -116,12 +210,12 @@ void ListaLaboratorio::guardarArchivoAleatorio()
    archivoSalida.close();
 }
 
-void ListaLaboratorio::leerArchivoAleatorio()
+void listaLaboratorio::leerArchivoAleatorio()
 {
     ifstream archivoEntrada ("archivo.laboratorio",ios::in | ios::binary);
     if(!archivoEntrada)
     {
-        cout<<"El archivo de laboratorio no existe."<<endl;
+        cout<<"El archivo de Laboratorio no existe."<<endl;
         return;
     }
 
@@ -131,7 +225,6 @@ void ListaLaboratorio::leerArchivoAleatorio()
 
     while(archivoEntrada && !archivoEntrada.eof())
     {
-        //curso->imprimir();
         this->insertar(curso.getCodigo(),curso.getNombre(),curso.getMatriculados(),curso.getHora(),curso.getNumLaboratorio(),curso.getInstructor());
         archivoEntrada.read(reinterpret_cast<char *> (&curso), sizeof(Laboratorio));
 
@@ -139,5 +232,7 @@ void ListaLaboratorio::leerArchivoAleatorio()
     archivoEntrada.close();
 
 }
+
+
 
 
