@@ -321,6 +321,29 @@
        <string>Agregar</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="TxtCupo">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>270</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>270</y>
+        <width>43</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cupo:</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
