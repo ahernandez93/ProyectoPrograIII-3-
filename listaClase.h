@@ -11,6 +11,9 @@ class listaClase
         void insertar(int, const char *, int, const char*, int, const char *, int);
         void insertarAlFinal(Curso *);
         void EliminarCurso(int);
+        void ModificarCurso(int, char *, int, char *, int, char *, int);
+        void Matricular(int);
+
         void mostrarLista();
         bool buscarCurso(int);
         void guardarArchivoAleatorio();
