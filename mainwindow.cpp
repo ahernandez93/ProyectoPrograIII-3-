@@ -30,6 +30,26 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     lista1->mostrarLista();
     lista2->leerArchivoAleatorio();
+
+    if(lista1->getInicio() == 0){
+
+    }
+    else
+    {
+        int codigo = ui->CboCodigo->currentText().toInt();
+        Curso * encontrado = lista1->buscarCurso2(codigo);
+
+        ui->TxtCodigo->setText(QString::number(encontrado->getCodigo()));
+        ui->TxtNombre->setText(QString(encontrado->getNombre()));
+        ui->TxtMatriculados->setText(QString::number(encontrado->getMatriculados()));
+        ui->TxtHora->setText(QString(encontrado->getHora()));
+        ui->TxtAula->setText(QString::number(((Clase *)encontrado)->getAula()));
+        ui->TxtCatedratico->setText(QString(((Clase *)encontrado)->getCatedratico()));
+        ui->TxtDias->setText(QString::number(((Clase *)encontrado)->getDias()));
+        ui->TxtCupo->setText(QString::number(encontrado->getCupo() - encontrado->getMatriculados()));
+    }
+
+
 }
 
 MainWindow::~MainWindow()
@@ -91,4 +111,57 @@ void MainWindow::on_BtnAgregar_clicked()
 void MainWindow::on_pushButton_clicked()
 {
 
+}
+
+void MainWindow::on_CboCodigo_activated(int index)
+{
+    int codigo = ui->CboCodigo->currentText().toInt();
+    Curso * encontrado = lista1->buscarCurso2(codigo);
+
+
+    ui->TxtCodigo->setText(QString::number(encontrado->getCodigo()));
+    ui->TxtNombre->setText(QString(encontrado->getNombre()));
+    ui->TxtMatriculados->setText(QString::number(encontrado->getMatriculados()));
+    ui->TxtHora->setText(QString(encontrado->getHora()));
+    ui->TxtAula->setText(QString::number(((Clase *)encontrado)->getAula()));
+    ui->TxtCatedratico->setText(QString(((Clase *)encontrado)->getCatedratico()));
+    ui->TxtDias->setText(QString::number(((Clase *)encontrado)->getDias()));
+    ui->TxtCupo->setText(QString::number(encontrado->getCupo() - encontrado->getMatriculados()));
+}
+
+void MainWindow::on_BtnNuevo_clicked()
+{
+    ui->TxtCodigo->setText("");
+    ui->TxtNombre->setText("");
+    ui->TxtMatriculados->setText("");
+    ui->TxtHora->setText("");
+    ui->TxtAula->setText("");
+    ui->TxtCatedratico->setText("");
+    ui->TxtDias->setText("");
+    ui->TxtCupo->setText("");
+}
+
+void MainWindow::on_BtnModificar_clicked()
+{
+
+}
+
+void MainWindow::on_BtnEliminar_clicked()
+{
+    if(ui->TxtCodigo->text().isEmpty())
+    {
+       QMessageBox msgbox;
+       msgbox.setText("Codigo esta en blanco");
+       msgbox.exec();
+    }
+    else
+    {
+        lista1->EliminarCurso(ui->TxtCodigo->text().toInt());
+        ui->CboCodigo->removeItem(ui->CboCodigo->currentIndex());
+
+        if(lista1->getInicio() == 0)
+            ui->BtnNuevo->click();
+        else
+            ui->CboCodigo->activated(ui->CboCodigo->currentIndex());
+    }
 }

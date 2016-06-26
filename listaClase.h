@@ -10,12 +10,14 @@ class listaClase
         void insertarAlInicio(Curso *);
         void insertar(int, const char *, int, const char*, int, const char *, int);
         void insertarAlFinal(Curso *);
+        void EliminarCurso(int);
         void mostrarLista();
         bool buscarCurso(int);
         void guardarArchivoAleatorio();
         void leerArchivoAleatorio();
         Curso * getInicio();
         void agregar(Curso *);
+        Curso * buscarCurso2(int);
 
     protected:
 
@@ -23,6 +25,7 @@ class listaClase
         Curso * inicio;
         Curso * fin;
         char nombreArchivo[30];
+
 };
 
 #endif // listaClase_H

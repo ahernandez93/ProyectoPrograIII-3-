@@ -21,6 +21,14 @@ private slots:
 
     void on_BtnAgregar_clicked();
 
+    void on_CboCodigo_activated(int index);
+
+    void on_BtnNuevo_clicked();
+
+    void on_BtnModificar_clicked();
+
+    void on_BtnEliminar_clicked();
+
 private:
     Ui::MainWindow *ui;
     listaClase * lista1;
