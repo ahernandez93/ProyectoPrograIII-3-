@@ -17,7 +17,7 @@ listaClase::listaClase()
 listaClase::~listaClase()
 {
     //dtor
-    cout<<"Detructor de lista"<<endl;
+    cout<<"Detructor de lista de Clases"<<endl;
 
     Curso * temp = inicio;
     while(inicio != 0){
@@ -53,6 +53,10 @@ void listaClase::insertar(int codigo, const char * nombre, int matriculados, con
         nuevo->setAnterior(fin);
         fin = nuevo;
    }
+}
+
+Curso * listaClase::getInicio(){
+    return inicio;
 }
 
 void listaClase::insertarAlFinal(Curso * nuevo)
@@ -121,7 +125,7 @@ void listaClase::leerArchivoAleatorio()
     ifstream archivoEntrada ("archivo.clase",ios::in | ios::binary);
     if(!archivoEntrada)
     {
-        cout<<"El archivo no existe."<<endl;
+        cout<<"El archivo de clase no existe."<<endl;
         return;
     }
 

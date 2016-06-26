@@ -17,7 +17,7 @@ ListaLaboratorio::ListaLaboratorio()
 ListaLaboratorio::~ListaLaboratorio()
 {
     //dtor
-    cout<<"Detructor de lista"<<endl;
+    cout<<"Detructor de lista de laboratorio"<<endl;
 
     Curso * temp = inicio;
     while(inicio != 0){
@@ -121,7 +121,7 @@ void ListaLaboratorio::leerArchivoAleatorio()
     ifstream archivoEntrada ("archivo.laboratorio",ios::in | ios::binary);
     if(!archivoEntrada)
     {
-        cout<<"El archivo no existe."<<endl;
+        cout<<"El archivo de laboratorio no existe."<<endl;
         return;
     }
 
