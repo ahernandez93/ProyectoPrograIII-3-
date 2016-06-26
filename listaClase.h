@@ -14,6 +14,7 @@ class listaClase
         bool buscarCurso(int);
         void guardarArchivoAleatorio();
         void leerArchivoAleatorio();
+        Curso * getInicio();
         void agregar(Curso *);
 
     protected:

@@ -7,26 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>411</width>
-    <height>446</height>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Control Academico</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>400</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
@@ -107,6 +94,9 @@
         <width>171</width>
         <height>20</height>
        </rect>
+      </property>
+      <property name="cursorMoveStyle">
+       <enum>Qt::LogicalMoveStyle</enum>
       </property>
      </widget>
      <widget class="QLabel" name="label_6">
@@ -613,6 +603,19 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>410</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -635,6 +638,40 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>TxtCodigo</tabstop>
+  <tabstop>TxtNombre</tabstop>
+  <tabstop>TxtMatriculados</tabstop>
+  <tabstop>TxtHora</tabstop>
+  <tabstop>TxtAula</tabstop>
+  <tabstop>TxtCatedratico</tabstop>
+  <tabstop>TxtDias</tabstop>
+  <tabstop>BtnBuscar</tabstop>
+  <tabstop>BtnNuevo</tabstop>
+  <tabstop>BtnAgregar</tabstop>
+  <tabstop>BtnModificar</tabstop>
+  <tabstop>BtnEliminar</tabstop>
+  <tabstop>BtnMatricular</tabstop>
+  <tabstop>BtnAbrir</tabstop>
+  <tabstop>BtnGuardar</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>CboCodigo</tabstop>
+  <tabstop>TxtNombre_2</tabstop>
+  <tabstop>TxtDias_2</tabstop>
+  <tabstop>TxtCodigo_2</tabstop>
+  <tabstop>TxtCatedratico_2</tabstop>
+  <tabstop>TxtAula_2</tabstop>
+  <tabstop>TxtMatriculados_2</tabstop>
+  <tabstop>TxtHora_2</tabstop>
+  <tabstop>BtnGuardar_2</tabstop>
+  <tabstop>BtnNuevo_2</tabstop>
+  <tabstop>BtnBuscar_2</tabstop>
+  <tabstop>BtnAbrir_2</tabstop>
+  <tabstop>BtnModificar_2</tabstop>
+  <tabstop>BtnEliminar_2</tabstop>
+  <tabstop>BtnMatricular_2</tabstop>
+  <tabstop>CboCodigo_2</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

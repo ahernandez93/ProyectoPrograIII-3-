@@ -18,7 +18,6 @@ SOURCES += main.cpp\
     curso.cpp \
     laboratorio.cpp \
     listaClase.cpp \
-    listaenlazada.cpp \
     listalaboratorio.cpp
 
 HEADERS  += mainwindow.h \
@@ -26,7 +25,6 @@ HEADERS  += mainwindow.h \
     curso.h \
     laboratorio.h \
     listaClase.h \
-    listaenlazada.h \
     listalaboratorio.h
 
 FORMS    += mainwindow.ui

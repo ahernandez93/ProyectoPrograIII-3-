@@ -7,54 +7,88 @@
 #include "listaClase.h"
 #include "listalaboratorio.h"
 #include <QMessageBox>
+#include <stdlib.h>
+#include <stdio.h>
+#include <qmessagebox.h>
+#include <string.h>
 
+using namespace  std;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    //QMessageBox msgbox;
     ui->setupUi(this);
     lista1 = new listaClase();
     lista2= new ListaLaboratorio;
     lista1->leerArchivoAleatorio();
-    lista2->leerArchivoAleatorio();
-    lista1->guardarArchivoAleatorio();
+    Curso * temp=lista1->getInicio();
+    while(temp!=0){
+        QString s=QString::number(temp->getCodigo());
+        ui->CboCodigo->addItem(s);
+        temp=temp->getSiguiente();
+    }
+    lista1->mostrarLista();
     lista2->leerArchivoAleatorio();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    lista1->guardarArchivoAleatorio();
+    lista2->guardarArchivoAleatorio();
+
     delete lista1;
     delete lista2;
 
 
 }
 
-void MainWindow::on_pushButton_clicked()
+
+
+void MainWindow::on_BtnAgregar_clicked()
 {
-   // Curso * curso1 = new Clase(1,"Programacion III",15,"1pm",501,"Amed Castro",12345);
 
-   // Curso * curso2 = new Clase(2,"Programacion IV",13,"2pm",50,"Allan Villatoro",1234);
+    int codigo=ui->TxtCodigo->text().toInt();
+    if(lista1->buscarCurso(codigo)){
+       QMessageBox msgbox;
+       msgbox.setText("Curso ya existe");
+       msgbox.exec();
+       return;
+    }
+    QString Qnombre=ui->TxtNombre->text();
+    char * nombre=new char[strlen(Qnombre.toStdString().c_str())+1];
+    strcpy(nombre,Qnombre.toStdString().c_str());
 
-   // Curso * curso3 = new Clase(3,"Programacion V",10,"2pm",10,"Allan Hernandez",6);
+    int matriculados=ui->TxtMatriculados->text().toInt();
 
-//        listaClase * lista = new listaClase();
-        //lista->insertarAlFinal(curso1);
-        //lista->insertarAlFinal(curso2);
-        //lista->insertarAlFinal(curso3);
+    QString Qhora=ui->TxtHora->text();
+    char * hora= new char[strlen(Qnombre.toStdString().c_str())+1];
+    strcpy(hora,Qhora.toStdString().c_str());
 
-   //     lista->leerArchivoAleatorio();
-     //   lista->mostrarLista();
 
-       // lista->guardarArchivoAleatorio();
+    int aula=ui->TxtAula->text().toInt();
 
-        //delete curso1;
-        //delete curso2;
-        //delete curso3;
+    QString Qcatedratico=ui->TxtCatedratico->text();
+    char * catedratico= new char[strlen(Qcatedratico.toStdString().c_str())+1];
+    strcpy(catedratico,Qcatedratico.toStdString().c_str());
+
+    int dias=ui->TxtDias->text().toInt();
+
+
+    Curso * nuevo= new Clase(codigo,nombre,matriculados,hora,aula,catedratico,dias);
+    nuevo->imprimir();
+    cout<<endl;
+    ui->CboCodigo->addItem(ui->TxtCodigo->text());
+    lista1->insertar(codigo,nombre,matriculados,hora,aula,catedratico,dias);
+
+    //cout<<nombre<<endl;
+    //delete nombre;
+    delete nuevo;
 
 }
 
-void MainWindow::on_BtnAgregar_clicked()
+void MainWindow::on_pushButton_clicked()
 {
 
 }
