@@ -50,7 +50,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     listaClase * lista1;
-    ListaLaboratorio * lista2;
+    listaLaboratorio * lista2;
 
 };
 

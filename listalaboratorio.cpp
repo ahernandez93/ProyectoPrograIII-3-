@@ -109,21 +109,19 @@ void listaLaboratorio::EliminarCurso(int codigo)
             }
             else if(temp->getAnterior() != 0 && temp->getSiguiente() == 0)
             {
-                temp->getAnterior()->setSiguiente(0);
+                temp->getAnterior()->setSiguiente(temp->getSiguiente());
                 fin = temp->getAnterior();
                 delete temp;
             }
             else
             {
                 delete temp;
-                inicio = NULL;
-                fin = NULL;
+                inicio = 0;
+                fin = 0;
             }
         }
         temp = temp->getSiguiente();
     }
-
-
 }
 
 void listaLaboratorio::ModificarCurso(int codigo, char * nombre, int matriculados, char * hora, int NumLaboratorio, char * Instructor)
@@ -150,7 +148,7 @@ void listaLaboratorio::Matricular(int codigo)
     while(temp !=0){
         if(codigo == temp->getCodigo())
         {
-            if(temp->getMatriculados()<30)
+            if(temp->getMatriculados()<12)
                 temp->setMatriculados(temp->getMatriculados() + 1);
             else
             {

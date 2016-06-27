@@ -91,37 +91,37 @@ void listaClase::agregar(Curso* nuevo)
 void listaClase::EliminarCurso(int codigo)
 {
     Curso * temp = inicio;
-    while(temp !=0){
-        if(codigo == temp->getCodigo()){
+        while(temp !=0){
+            if(codigo == temp->getCodigo()){
 
-            if (temp->getSiguiente() != 0 && temp->getAnterior() !=0)
-            {
-                temp->getAnterior()->setSiguiente(temp->getSiguiente());
-                temp->getSiguiente()->setAnterior(temp->getAnterior());
-                delete temp;
+                if (temp->getSiguiente() != 0 && temp->getAnterior() !=0)
+                {
+                    temp->getAnterior()->setSiguiente(temp->getSiguiente());
+                    temp->getSiguiente()->setAnterior(temp->getAnterior());
+                    delete temp;
 
+                }
+                else if(temp->getAnterior() == 0 && temp->getSiguiente() != 0)
+                {
+                    temp->getSiguiente()->setAnterior(0);
+                    inicio = temp->getSiguiente();
+                    delete temp;
+                }
+                else if(temp->getAnterior() != 0 && temp->getSiguiente() == 0)
+                {
+                    temp->getAnterior()->setSiguiente(temp->getSiguiente());
+                    fin = temp->getAnterior();
+                    delete temp;
+                }
+                else
+                {
+                    delete temp;
+                    inicio = 0;
+                    fin = 0;
+                }
             }
-            else if(temp->getAnterior() == 0 && temp->getSiguiente() != 0)
-            {
-                temp->getSiguiente()->setAnterior(0);
-                inicio = temp->getSiguiente();
-                delete temp;
-            }
-            else if(temp->getAnterior() != 0 && temp->getSiguiente() == 0)
-            {
-                temp->getAnterior()->setSiguiente(0);
-                fin = temp->getAnterior();
-                delete temp;
-            }
-            else
-            {
-                delete temp;
-                inicio = NULL;
-                fin = NULL;
-            }
+            temp = temp->getSiguiente();
         }
-        temp = temp->getSiguiente();
-    }
 
 
 }
