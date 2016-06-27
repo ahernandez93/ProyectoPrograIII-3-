@@ -59,7 +59,7 @@ void Curso::setHora(const char * hora)
 
 int Curso::getCodigo() const
 {
-    return this->codigo;
+    return codigo;
 }
 const char * Curso::getNombre() const
 {
