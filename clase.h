@@ -21,7 +21,7 @@ public:
 
 private:
     int aula;
-    char catedratico[100];
+    char catedratico[30];
     int dias;
 };
 

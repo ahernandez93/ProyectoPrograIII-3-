@@ -123,7 +123,7 @@ void MainWindow::on_BtnNuevo_clicked()
     ui->TxtDias->setText("");
     ui->TxtCupo->setText("");
     ui->CboCodigo->setCurrentIndex(-1);
-    ui->TxtCodigo_2->setFocus();
+    ui->TxtCodigo->setFocus();
 }
 
 void MainWindow::on_BtnAgregar_clicked()
