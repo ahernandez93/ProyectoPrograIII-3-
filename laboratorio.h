@@ -22,7 +22,7 @@ public:
 
 private:
     int numlaboratorio;
-    char * instructor;
+    char instructor[100];
     int dias;
 };
 
