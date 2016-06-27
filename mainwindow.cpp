@@ -22,10 +22,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->setFixedSize(this->maximumSize());
 
     lista1 = new listaClase();
-    lista2= new ListaLaboratorio;
+    lista2= new listaLaboratorio();
 
     lista1->leerArchivoAleatorio();
-
     Curso * temp=lista1->getInicio();
     while(temp!=0){
         QString s=QString::number(temp->getCodigo());
@@ -33,8 +32,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         temp=temp->getSiguiente();
     }
     lista1->mostrarLista();
-    lista2->leerArchivoAleatorio();
 
+    lista2->leerArchivoAleatorio();
+    Curso * temp2=lista2->getInicio();
+    while(temp2!=0){
+        QString s2=QString::number(temp2->getCodigo());
+        ui->CboCodigo_2->addItem(s2);
+        temp2=temp2->getSiguiente();
+    }
+
+    //Clases
     if(lista1->getInicio() == 0){
 
     }
@@ -53,6 +60,24 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->TxtCupo->setText(QString::number(encontrado->getCupo() - encontrado->getMatriculados()));
     }
 
+    //Laboratorios
+    if(lista2->getInicio() == 0){
+
+    }
+    else
+    {
+        int codigo2 = ui->CboCodigo_2->currentText().toInt();
+        Curso * encontrado2 = lista2->buscarCurso2(codigo2);
+
+        ui->TxtCodigo_2->setText(QString::number(encontrado2->getCodigo()));
+        ui->TxtNombre_2->setText(QString(encontrado2->getNombre()));
+        ui->TxtMatriculados_2->setText(QString::number(encontrado2->getMatriculados()));
+        ui->TxtHora_2->setText(QString(encontrado2->getHora()));
+        ui->TxtAula_2->setText(QString::number(((Laboratorio *)encontrado2)->getNumLaboratorio()));
+        ui->TxtCatedratico_2->setText(QString(((Laboratorio *)encontrado2)->getInstructor()));
+        ui->TxtDias_2->setText(QString::number(((Laboratorio *)encontrado2)->getDias()));
+        ui->TxtCupo_2->setText(QString::number(encontrado2->getCupo() - encontrado2->getMatriculados()));
+    }
 }
 
 MainWindow::~MainWindow()
@@ -98,10 +123,12 @@ void MainWindow::on_BtnNuevo_clicked()
     ui->TxtDias->setText("");
     ui->TxtCupo->setText("");
     ui->CboCodigo->setCurrentIndex(-1);
+    ui->TxtCodigo_2->setFocus();
 }
 
 void MainWindow::on_BtnAgregar_clicked()
 {
+
 
     int codigo=ui->TxtCodigo->text().toInt();
     if(lista1->buscarCurso(codigo)){
@@ -109,6 +136,15 @@ void MainWindow::on_BtnAgregar_clicked()
        msgbox.setText("Curso ya existe");
        msgbox.exec();
        return;
+    }
+
+    if (codigo == 0)
+    {
+        QMessageBox msgbox;
+        msgbox.setText("Datos vacios, no puede agregar");
+        msgbox.exec();
+        ui->TxtCodigo->setFocus();
+        return;
     }
 
     QString Qnombre=ui->TxtNombre->text();
@@ -148,6 +184,13 @@ void MainWindow::on_BtnAgregar_clicked()
     ui->CboCodigo->addItem(ui->TxtCodigo->text());
     lista1->insertar(codigo,nombre,matriculados,hora,aula,catedratico,dias);
 
+    QMessageBox msgBox;
+    msgBox.setText("Clase agregada con exito");
+    msgBox.exec();
+
+    ui->CboCodigo->setCurrentIndex(ui->CboCodigo->findText(QString::number(codigo)));
+    ui->CboCodigo->activated(ui->CboCodigo->currentIndex());
+
     delete nuevo;
 }
 
@@ -176,7 +219,7 @@ void MainWindow::on_BtnModificar_clicked()
     lista1->ModificarCurso(codigo, nombre, matriculados, hora, aula, catedratico, dias);
 
     QMessageBox msgBox;
-    msgBox.setText("Curso modificado con exito");
+    msgBox.setText("Clase modificada con exito");
     msgBox.exec();
 
     ui->CboCodigo->activated(ui->CboCodigo->currentIndex());
@@ -185,25 +228,25 @@ void MainWindow::on_BtnModificar_clicked()
 void MainWindow::on_BtnEliminar_clicked()
 {
     if(ui->TxtCodigo->text().isEmpty())
-    {
-       QMessageBox msgbox;
-       msgbox.setText("Codigo esta en blanco");
-       msgbox.exec();
-    }
-    else
-    {
-        lista1->EliminarCurso(ui->TxtCodigo->text().toInt());
-        QMessageBox msgBox;
-        msgBox.setText("Curso eliminado con exito");
-        msgBox.exec();
-
-        ui->CboCodigo->removeItem(ui->CboCodigo->currentIndex());
-
-        if(lista1->getInicio() == 0)
-            ui->BtnNuevo->click();
+        {
+           QMessageBox msgbox;
+           msgbox.setText("Codigo esta en blanco");
+           msgbox.exec();
+        }
         else
-            ui->CboCodigo->activated(ui->CboCodigo->currentIndex());
-    }
+        {
+            lista1->EliminarCurso(ui->TxtCodigo->text().toInt());
+            QMessageBox msgBox;
+            msgBox.setText("Curso eliminado con exito");
+            msgBox.exec();
+
+            ui->CboCodigo->removeItem(ui->CboCodigo->currentIndex());
+
+            if(lista1->getInicio() == 0)
+                ui->BtnNuevo->click();
+            else
+                ui->CboCodigo->activated(ui->CboCodigo->currentIndex());
+        }
 }
 
 void MainWindow::on_BtnMatricular_clicked()
@@ -228,9 +271,9 @@ void MainWindow::on_CboCodigo_2_activated(int index)
     ui->TxtNombre_2->setText(QString(encontrado->getNombre()));
     ui->TxtMatriculados_2->setText(QString::number(encontrado->getMatriculados()));
     ui->TxtHora_2->setText(QString(encontrado->getHora()));
-    ui->TxtAula_2->setText(QString::number(((Clase *)encontrado)->getAula()));
-    ui->TxtCatedratico_2->setText(QString(((Clase *)encontrado)->getCatedratico()));
-    ui->TxtDias_2->setText(QString::number(((Clase *)encontrado)->getDias()));
+    ui->TxtAula_2->setText(QString::number(((Laboratorio *)encontrado)->getNumLaboratorio()));
+    ui->TxtCatedratico_2->setText(QString(((Laboratorio *)encontrado)->getInstructor()));
+    ui->TxtDias_2->setText(QString::number(((Laboratorio *)encontrado)->getDias()));
     ui->TxtCupo_2->setText(QString::number(encontrado->getCupo() - encontrado->getMatriculados()));
 }
 
@@ -245,6 +288,7 @@ void MainWindow::on_BtnNuevo_2_clicked()
     ui->TxtDias_2->setText("");
     ui->TxtCupo_2->setText("");
     ui->CboCodigo_2->setCurrentIndex(-1);
+    ui->TxtCodigo_2->setFocus();
 }
 
 void MainWindow::on_BtnAgregar_2_clicked()
@@ -255,6 +299,15 @@ void MainWindow::on_BtnAgregar_2_clicked()
        msgbox.setText("Laboratorio ya existe");
        msgbox.exec();
        return;
+    }
+
+    if (codigo == 0)
+    {
+        QMessageBox msgbox;
+        msgbox.setText("Datos vacios, no puede agregar");
+        msgbox.exec();
+        ui->TxtCodigo_2->setFocus();
+        return;
     }
 
     QString Qnombre=ui->TxtNombre_2->text();
@@ -269,14 +322,14 @@ void MainWindow::on_BtnAgregar_2_clicked()
 
     int aula=ui->TxtAula_2->text().toInt();
 
-    if((aula >= 1) &&  (aula <= 50))
+    if((aula >= 1) &&  (aula <= 10))
     {
 
     }
     else
     {
         QMessageBox msgbox;
-        msgbox.setText("Aula no valida, ingrese un valor entre 1 y 50");
+        msgbox.setText("Laboratorio no valido, ingrese un valor entre 1 y 10");
         msgbox.exec();
         ui->TxtAula_2->setFocus();
         return;
@@ -288,11 +341,18 @@ void MainWindow::on_BtnAgregar_2_clicked()
 
     int dias=ui->TxtDias_2->text().toInt();
 
-    Curso * nuevo= new Clase(codigo,nombre,matriculados,hora,aula,catedratico,dias);
+    Curso * nuevo= new Laboratorio(codigo,nombre,matriculados,hora,aula,catedratico);
     nuevo->imprimir();
     cout<<endl;
     ui->CboCodigo_2->addItem(ui->TxtCodigo_2->text());
-    lista2->insertar(codigo,nombre,matriculados,hora,aula,catedratico,dias);
+    lista2->insertar(codigo,nombre,matriculados,hora,aula,catedratico);
+
+    QMessageBox msgBox;
+    msgBox.setText("Laboratorio agregado con exito");
+    msgBox.exec();
+
+    ui->CboCodigo_2->setCurrentIndex(ui->CboCodigo_2->findText(QString::number(codigo)));
+    ui->CboCodigo_2->activated(ui->CboCodigo_2->currentIndex());
 
     delete nuevo;
 }
@@ -312,6 +372,18 @@ void MainWindow::on_BtnModificar_2_clicked()
     strcpy(hora,Qhora.toStdString().c_str());
 
     int aula=ui->TxtAula_2->text().toInt();
+    if((aula >= 1) &&  (aula <= 10))
+    {
+
+    }
+    else
+    {
+        QMessageBox msgbox;
+        msgbox.setText("Laboratorio no valido, ingrese un valor entre 1 y 10");
+        msgbox.exec();
+        ui->TxtAula_2->setFocus();
+        return;
+    }
 
     QString Qcatedratico=ui->TxtCatedratico_2->text();
     char * catedratico= new char[strlen(Qcatedratico.toStdString().c_str())+1];
@@ -319,7 +391,7 @@ void MainWindow::on_BtnModificar_2_clicked()
 
     int dias=ui->TxtDias_2->text().toInt();
 
-    lista2->ModificarCurso(codigo, nombre, matriculados, hora, aula, catedratico, dias);
+    lista2->ModificarCurso(codigo, nombre, matriculados, hora, aula, catedratico);
 
     QMessageBox msgBox;
     msgBox.setText("Laboratorio modificado con exito");
@@ -338,6 +410,7 @@ void MainWindow::on_BtnEliminar_2_clicked()
     }
     else
     {
+       // int codigo = ui->TxtCodigo_2->text().toInt();
         lista2->EliminarCurso(ui->TxtCodigo_2->text().toInt());
         QMessageBox msgBox;
         msgBox.setText("Laboratorio eliminado con exito");

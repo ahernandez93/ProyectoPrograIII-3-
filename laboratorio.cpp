@@ -7,7 +7,7 @@ using namespace std;
 Laboratorio::Laboratorio() : Curso()
 {
     this->numlaboratorio = 0;
-    this->instructor=new char [1];
+    //this->instructor=new char [1];
     strcpy(this->instructor,"");
     this->dias = 0;
 }
@@ -22,7 +22,7 @@ Laboratorio::Laboratorio(int codigo,const char * nombre, int matriculados,const 
 Laboratorio::~Laboratorio()
 {
     cout<<"destructor laboratorio"<<endl;
-    delete [] this->instructor;
+    //delete [] this->instructor;
 }
 
 void Laboratorio::setNumLaboratorio(int numlaboratorio)
@@ -32,8 +32,8 @@ void Laboratorio::setNumLaboratorio(int numlaboratorio)
 
 void Laboratorio::setInstructor(const char * instructor)
 {
-    delete [] this->instructor;
-    this->instructor=new char [strlen(instructor)+1];
+    //delete [] this->instructor;
+    //this->instructor=new char [strlen(instructor)+1];
     strcpy(this->instructor,instructor);
 }
 
